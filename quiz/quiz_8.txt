@@ -1,0 +1,165 @@
+1. note: consider 64 bit compilation 
+#include<stdio.h>
+#include<stdlib.h>
+
+int main()
+{
+    int *a[3];
+    a[0] = (int*) malloc(sizeof(int)*3);
+    a[1] = (int*) malloc(sizeof(int)*3);
+    a[2] = (int*) malloc(sizeof(int)*3);
+
+    printf("\n sizeof(a) = %d \n",sizeof(a));
+    free(a);
+    return 0;
+}
+Answers
+1. sizeof(a) = 24 unable to allocate memory
+2. sizeof(24) = 24, 36bytes of memory allocated and segmentation fault ---right
+3. sizeof(24) = 24, 36bytes of memory allocated and freeup memory allocated by all malloc.
+4. sizeof(24) = 12, 36bytes of memory allocated and segmentation fault
+
+2. what will be the output of this code? 
+
+#include<stdio.h>
+#define a 10
+#define z(a) a-1
+#define SQR(x) (x*x)
+int main()
+{
+int c, b=3;
+c = z(a) * SQR(b+2);
+printf("%d\n", c);
+return 0;
+}
+Answers
+1. -1 ---right
+2. 225
+3. 99
+4. 5
+
+3. Can you combine the following two statements into one?
+char *p;
+p = (char*) malloc(100);
+Answers
+1. char p = *malloc(100);
+2. char *p = (char) malloc(100);
+3. char *p = (char*)malloc(100); ---right
+4. char *p = (char *)(malloc*)(100);
+
+4. what will be the output of this code?
+
+#include<stdio.h>
+#define a 100
+int main()
+{
+printf("a : %d\n",a);
+#ifndef a
+#define a 30
+#else
+#undef a
+#define a 40
+printf("a : %d",a);
+return 0;
+}
+Answers
+1. a : 100 a : 30
+2. a : 0   a : 100
+3. a : 100 a : 40
+4. Compile time error ---right
+
+5. #include<stdio.h>
+#include<stdlib.h>
+int main()
+{
+char *ptr=NULL;
+int alloc_length =16 ;
+int new_length;
+
+ptr = (char *)malloc(sizeof(char)*alloc_length);
+
+ptr = realloc(ptr, alloc_length << 1);
+
+free(ptr);
+ptr=NULL;
+
+return 0;
+}
+Answers
+1. allocated 16bytes and free 32bytes
+2. allocated 32bytes and free 32bytes --- right
+3. allocated 32bytes and free 16bytes
+4. allocated 16bytes and free 16bytes
+
+6. select the major difference between malloc() and calloc().
+Answers
+1. Memory allocated by malloc() has garbage values and memory allocated by calloc() has all the bytes initialized to 0. ---right
+2. Memory allocated by malloc() has all values initialized to 0 and memory allocated by calloc() has all garbage values.
+3. Malloc() allocates the memory and calloc resizes the memory already allocated.
+4. None of the above.
+
+7. The return type of malloc() is
+Answers
+1. Null
+2. void pointer ---right
+3. int pointer
+4. float pointer
+
+8. what will be the output of the code below.
+
+#include<stdio.h>
+#define cal(a,b)(a*b+b*a)
+int main()
+{
+    int a = 10,b = 20;
+    int result = cal(a,b);
+    printf("Result = %d",result);
+    return 0;
+}
+Answers
+1. 200
+2. 2200
+3. 400 ---right
+4. 420
+
+9. The functions used to allocate the memory at runtime are available in which standard library?
+Answers
+1. stdio.h
+2. string.h
+3. math.h
+4. stdlib.h ---right
+
+10. #include<stdio.h>
+#ifdef __FUN_H
+#define __FUN_H
+#pragma pack(2)
+typedef struct employee
+{
+  int age;
+  int id;
+  char name[40];
+  char section; // A,B,C 
+}emp;
+
+#endif
+
+#pragma pack(1)
+typedef struct employee
+{
+  int age;
+  int id;
+  char name[60];
+  char section; // A,B,C 
+}emp;
+
+int main()
+{
+emp e1;
+printf("\nsizeof(e1) = %d\n",sizeof(e1));
+return 0;
+}
+Answers
+1. sizeof(e1) = 69 ---right
+2. sizeof(e1) = 52
+3. sizeof(e1) = 50
+4. error: redefinition of ‘struct employee’

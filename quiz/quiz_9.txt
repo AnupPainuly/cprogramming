@@ -1,0 +1,206 @@
+
+1. #include <stdio.h>
+int main()
+{
+    union test
+    {
+        int i;
+        int j;
+    };
+     
+    union test var=10;
+    printf("%d,%d\n",var.i,var.j);
+}
+Answers
+1. 10,10
+2. 10,0
+3. 0,10
+4. Error--- right
+
+2. What will be the output of following program ?
+#include <stdio.h>
+struct sample
+{
+    int a=1;
+    char b='S';
+    float c=11.5;
+};
+int main()
+{
+    struct sample s;
+    printf("%d,%c,%f",s.a,s.b,s.c);
+    return 0;
+}
+Answers
+1. Error ---right
+2. 1,S,11.5
+3. 1,S,11.500000
+4. No Error , No Output
+
+3. What will be the output?
+#include<stdio.h>
+#pragma pack(1)
+
+struct employee
+{
+    int emp_id;   
+    double salary;
+    struct person
+    {
+        char name[20]; 
+        char city[20]; 
+        struct date{
+          	  int day,month,year; 
+   		     }birth;
+      }p1;
+};
+int main()
+{
+    struct employee e1;
+    struct person p1;
+    
+    printf("sizeof(e1) : %d  ",sizeof(e1));
+    printf("sizeof(p1) : %d",sizeof(p1));
+   
+    return 0;
+}
+Answers
+1. sizeof(e1) : 14  sizeof(p1) : 6
+2. sizeof(e1) : 52  sizeof(p1) : 64
+3. sizeof(e1) : 64  sizeof(p1) : 52 --right
+4. sizeof(e1) : 60 sizeof(p1) :  52 
+
+4. which of the above bitfield declarations are invalid.
+struct demo
+{
+ 1)   int x : 5;
+ 2)   unsigned int z[10] : 5;
+ 3)   unsigned int y : 4;
+ 4)   static int a : 5;
+};
+
+Answers
+1. line 1 and 2
+2. line 2 and 4 --right
+3. line 3 and 4
+4. line 1 and 3
+
+5. What will be the output?
+#include<stdio.h>
+union
+{
+	int i;
+	char c;
+	char arr[4];
+}u;
+
+int main(void)
+{
+	u.c = 'D';
+	u.i = 0x0041;
+	u.arr[1] = u.arr[2] = 'E';
+	printf("%d %c",sizeof(u),u.c);
+
+	return 0;
+}
+
+Answers
+1. 4 A --right
+2. 2 D
+3. 3 A
+4. 3 D
+
+6. What is output of c code?
+
+struct test 
+{ 
+  unsigned int x[10] : 5; 
+};   
+int main() 
+{
+printf("%d",x[10]); 
+}
+
+Answers
+1. 0
+2. Compile time error ---right
+3. Undefined behavior
+4. 5
+
+7. What will be the Output?
+#include<stdio.h>
+
+int main()
+{
+    typedef struct
+    {
+        int id;
+        float price;
+    }DEMO;
+    DEMO d[3]={11,56.00,22,45.00,33,78.00};
+    fun(d+1);
+}
+void fun(DEMO *d)
+{
+    printf("%d %.2f",d->id,d->price)
+}
+
+Answers
+1. 22 45.00
+2. 11 56.00  --right
+3. Compile Time Error
+4. printf should be replaced with d[0].id,d[0].price
+
+8. What will be output below the given code. Consider a 32bit compiler.
+#include<stdio.h>
+struct s2
+{
+	char *cp;
+	union s1
+	{
+		unsigned a:31;
+		char b[2];
+		char *p;
+	}o1;
+}o2;
+
+int main(void)
+{
+	printf("%d %d %d\n",sizeof(struct s2) , sizeof(o2) ,sizeof(o2.o1));
+
+	return 0;
+}
+Answers
+1. 24 24 16
+2. 12 12 8
+3. 16 16 8
+4. 8 8 4  --right
+
+9. What will be the output?
+#include <stdio.h>
+union test
+{
+	unsigned int x: 3;
+	unsigned int y: 3;
+	int z;
+};
+int main(void)
+{
+	union test t;
+	t.x = 5;
+	t.y = 4;
+	t.z = 18;
+	printf("%4d %4d %4d\n", t.x, t.y, t.z);
+	return 0;
+}
+Answers
+1. 5 5 18
+2. 2    2   18   ---right
+3. 4    4   18
+4. 5 4 18 
+10. which of the following is not true in case of structures.
+Answers
+1. structure is a user defined data type.
+2. size of a structure is sum of size of each of its members.
+3. We can declare a structure within a function.
+4. We can initialize the members of structure at the time of structure declaration.  -right

@@ -1,0 +1,212 @@
+Quiz on file handling and bitwise operator
+
+
+1. What will be the output of the C program?
+/*This program uses the test.txt which contains the following data*/
+/* Sunbeam */
+
+#include<stdio.h>
+
+int main()
+{
+FILE *fp;
+char ch, str[7];
+fp=fopen("test.txt", "r"); 
+fseek(fp, 3L, SEEK_CUR);
+fgets(str, 6, fp);
+puts(str);
+return 0;
+}
+Answers
+1. Sunbe
+2. beam ---right
+3. Sunbeam
+4. eam
+
+2. What will be the output of the C program?
+/*This program uses the test.txt which contains the following data*/
+/* Welcome*/
+#include<stdio.h>
+#include<stdlib.h>
+int main()  {
+
+    int count = 0, ch = 0;
+    FILE *fp;
+	fp = fopen("test.txt", "r");
+    while(!feof(fp))    {
+        if((ch = getc(fp)) != EOF)  {
+            printf("%c", ch);
+            count ++;
+        }
+    }
+    feof(fp);
+    while(count)    {
+        fseek(fp, -2, SEEK_CUR);
+        printf("%c", getc(fp));
+        count--;
+    }
+    fclose(fp);
+}
+Answers
+1. WelcomemocleW -right
+2. Welcome emocleW
+3. WelcomeemocleW
+4. None
+
+3. What will be the output of the C program?
+
+/*This program uses the data.txt which contains the following data*/
+/* SunbeamDac*/
+
+#include<stdio.h>
+int main()
+{
+	unsigned char ch;
+	FILE *fp;
+	fp = fopen("data.txt", "r");
+	while ((ch = fgetc(fp)) != EOF)
+	{
+		printf("%c", ch);
+	}
+	fclose(fp);
+	return 0;
+}
+Answers
+1. Compilation Error
+2. It will print nothing.
+3. "SunbeamDac"
+4. "SunbeamDac" and loop continues for infinite times -right
+
+4. What is the purpose of "rb" in fopen() function used below in the code?
+FILE *fp;fp = fopen("sunbeam.txt", "rb");
+Answers
+1. Open "sunbeam.txt" in binary mode for reading ---right
+2. Create a new file "sunbeam.txt" for reading and writing
+3. Open "sunbeam.txt" in binary mode for reading and writing
+4. None of the above
+
+5. What will be the output of the following program ?  
+
+------------t1.txt--------------------
+ABCDEFGHIJKLMNOP
+-----------------------------------------
+
+#include <stdio.h>
+int main( void )
+{
+	int i,start,end;
+	FILE *fp=NULL;
+	char buf;
+
+	fp = fopen("t1.txt", "r");
+	fseek(fp, 0, SEEK_SET);
+	start=ftell(fp);
+	fseek(fp, 0, SEEK_END);
+	end=ftell(fp);
+	printf("\n File char count will be = %d\n",end-start);
+
+	return 0;
+} 
+Answers
+1. 16
+2. 17 ---right
+3. 18
+4. compiler error.
+
+6. What is the operator used to make 1's One's compliment.?
+Answers
+1. & Bitwise AND Operator
+2. | Bitwise OR operator
+3. ~ Bitwise Negate Operator  ---right
+4. ^ Bitwise Exclusive OR
+
+7. What will be output of following code? and text file data.
+------------test_file--------------------
+C is a general-purpose, 0 procedural computer programming language supporting structured programming 0, 
+lexical variable scope, and recursion, with a static type system 0. 
+-----------------------------------------
+
+#include <stdio.h>
+int main(){
+    char c;
+    FILE *fp;
+    fp=fopen("test_file.txt","r");
+    while((c=fgetc(fp))!= 0 )
+         printf("%c",c);
+    fclose(fp);
+    return 0;
+}
+Answers
+1. Print the contents of file "test_file.txt"
+2. Print the contents of file "test_file.txt" upto '0' character in "test_file.text"
+3. Infinite loop ---right
+4. Error in the code.
+
+8. What is output of following Code?int main(){
+
+int a,b,c;
+a=4;
+b=2;
+c=a<<b && a>>b;
+printf("%d",c);
+}
+Answers
+1. 1 ---right
+2. 0
+3. 4
+4. 2
+
+9. what will be the output of the following code?
+#include <stdio.h> 
+#include <stdlib.h> 
+#include <string.h> 
+typedef struct course
+{ 
+    int id; 
+    char Lname[20]; 
+    char Cname[20]; 
+}CRS; 
+  
+int main () 
+{ 
+    FILE *output_file; 
+    output_file = fopen ("data.dat", "w"); 
+    
+    CRS p1 = {1, "SUNBEAM_PUNE", "DAC"}; 
+    CRS p2 = {2, "SUNBEAM_KARAD", "KDAC"}; 
+       
+    fwrite (&p1, sizeof(CRS), 1, output_file); 
+    fwrite (&p2, sizeof(CRS), 1, output_file);      
+    fclose (output_file);
+    
+    //FILE *output_file; 
+    output_file = fopen ("data.dat", "r");
+    CRS p;
+    fread(&p,sizeof(CRS), 1, output_file);
+    fprintf(stdout,"%d %s %s\n",p.id,p.Lname,p.Cname);  
+    fread(&p,sizeof(CRS), 1, output_file);
+    fprintf(stdout,"%d %s %s\n",p.id,p.Lname,p.Cname);       
+    return 0; 
+}
+Answers
+1. 1 SUNBEAM_PUNE DAC     2 SUNBEAM_KARAD KDAC ---right
+2. 1 SUNBEAM_PUNE DAC
+3. 1 SUNBEAM_PUNE DAC        1 SUNBEAM_pune DAC
+4. 2 SUNBEAM_KARAD KDAC    2 SUNBEAM_KARAD KDAC
+
+10. Which files will get closed through the fclose() in the following program?
+#include<stdio.h>
+int main()
+{
+       FILE *fp, *ft;
+       fp = fopen("a.txt", "r");
+       ft = fopen("b.txt", "r");
+       fclose(fp,ft);
+return 0;
+}
+Answers
+1. a.txt b.txt
+2. a.txt
+3. b.txt
+4. error in fclose. --right
+
